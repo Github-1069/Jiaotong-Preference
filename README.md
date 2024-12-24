@@ -1,12 +1,11 @@
 # Jiaotong-Preference
 Unfinished:
-
--Data cleaning/collecting
--Data analysis
--Plot
--Poster
+- Data cleaning/collecting
+- Data analysis
+- Plot
+- Poster
 
 You can find: 
--**Raw data** in *data.csv*
--**Code** in *data_analysis.py*
+- **Raw data** in *data.csv*
+- **Code** in *data_analysis.py*
 

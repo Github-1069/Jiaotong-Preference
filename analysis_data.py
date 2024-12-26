@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 data_path=os.path.join(os.getcwd(),'raw_data1.csv')
 fgr=pd.read_csv(data_path)
@@ -28,10 +30,11 @@ timelmt={
 
 for i in trash:
     del(fgr[i])
-fgr[fgr=='(空)']=0
+fgr[fgr=='(空)']='0'
 
 namelist=fgr.columns
 for i in namelist:
     if len(i)>13:
-        fgr.rename(columns={i:i[0:4]+'地铁/公交车'},inplace=True)
-print(fgr.columns)
+        fgr.rename(columns={i:i[0:2]+'地铁/公交车'},inplace=True)
+
+fgr=fgr.apply(pd.to_numeric)

@@ -60,11 +60,11 @@ Questionnaires that collect
 
 #### Question 1
 
-1. 3 Factor ANOVA. Each group is defined by a triple $S = (W, C, D)$, where $W \in \{0, 1\}$ , $C \in \{0, 1\}$, $D \in \{0, 1, 2\}$ denote weather, time constraint and distance respectively. We then carry out **4 ANOVA tests**, each filling all the groups with the normalized probabilities of **one transportation option**. Then let Python calculate $SSW,\ SSC,\ SSD$, sum of squares due to interactions and $SSE$.
+1. 3 Factor ANOVA. Each group is defined by a triple $S = (D, W, C)$, where $D \in \{0, 1, 2\}$,  $W \in \{0, 1\}$ , $C \in \{0, 1\}$, denote distance, weather and time constraint respectively. We then carry out **4 ANOVA tests**, each filling all the groups with the normalized probabilities of **one transportation option**. Then let Python calculate $SSD,\ SSW,\ SSC$, sum of squares due to interactions and $SSE$.
 
 2. Another idea: Independence test with Pearson's $\chi^2$. If we reject $H_0$, we can conclude there are interactions between situational variables. Try `argmax` for normalized probabilities. For each transportation option, fill in the number of people in each group who most prefer that option under the group conditions. The test statistic is
    $$
-   \sum_w^W \sum_c^C \sum_d^D \frac{(f_{wcd} - e_{wcd})^2}{e_{wcd}} \sim \chi^2(2\times1\times1)
+   \sum_d^D \sum_w^W \sum_c^C \frac{(f_{dwc} - e_{dwc})^2}{e_{dwc}} \sim \chi^2(2\times1\times1)
    \nonumber
    $$
 

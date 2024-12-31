@@ -30,7 +30,7 @@ We may need to use statistical learning methods not mentioned in the course, lik
 | ------------ | -------- | ------------------------------------------------------------ |
 | Gender       | Dummy    | 0 for female, 1 for male.                                    |
 | Origin       | Category | 0 for eastern, 1 for middle, 2 for western.                  |
-| Grade        | Category | 0 for freshman, 1 for sophomore, etc.                        |
+| Grade        | Category | (we simply delve into the option of undergrduates so) 0 for freshman, 1 for sophomore, 2 for junior, 3 for senior.                         |
 | Major        | Category | 0 for STEM, 1 for ACEM, 2 for liberal arts and social science, 3 for medical. |
 | Income       | Int (¥)  | The student's income level in Chinese Yuan.                  |
 
@@ -40,7 +40,7 @@ We may need to use statistical learning methods not mentioned in the course, lik
 | ------------------------ | ---------------- | ------------------------------------------------------------ |
 | Choice of transportation | Vector of floats | Each student assigns scores to transportation options*, then the scores are converted into a probability distribution using the softmax function. If we decide to use categorical variables later, we can perform `argmax` to get the students' choices. If we decide to use continuous variables in ANOVA, then the softmax score of each option will be compared. |
 
-*Options include: 0 for subway/bus, 1 for taxi, 2 for bikes/EV, 3 for walking. 
+*Options include: 0 for subway/bus, 1 for taxi, 2 for bikes/e-bikes, 3 for walking. 
 
 ### Data Collection
 
@@ -57,22 +57,19 @@ Questionnaires that collect
 2. Fill NaN with 0.
 3. Rename the remaining columns and convert all independent variables into int 0, 1, 2...
 4. Transform each students' preference under each circumstance with softmax function. Note that we will not add $e^0$ into denominators. The probability that was originally 0 remains 0 after softmax operation.
+   
+**How this part is done will be shown in _Clean.ipynb_**
 
 #### Question 1
 
-1. 3 Factor ANOVA. Each group is defined by a triple $S = (D, W, C)$, where $D \in \{0, 1, 2\}$,  $W \in \{0, 1\}$ , $C \in \{0, 1\}$, denote distance, weather and time constraint respectively. We then carry out **4 ANOVA tests**, each filling all the groups with the normalized probabilities of **one transportation option**. Then let Python calculate $SSD,\ SSW,\ SSC$, sum of squares due to interactions and $SSE$.
+1. We tried to apply 3 Factor ANOVA in the first place. Specifically, each group is defined by a triple $S = (D, W, C)$, where $D \in \{0, 1, 2\}$,  $W \in \{0, 1\}$ , $C \in \{0, 1\}$, denote distance, weather and time constraint respectively. We then carry out **ANOVA tests**, each filling all the groups with the normalized probabilities of **one transportation option**. Then let Python calculate $SSD,\ SSW,\ SSC$, sum of squares due to interactions and $SSE$. Finally, we reach our conclusion via F-test. **However**, we failed for the distribution of the statistics doesn't follow the normal distribution.
 
-2. Another idea: Independence test with Pearson's $\chi^2$. If we reject $H_0$, we can conclude there are interactions between situational variables. Try `argmax` for normalized probabilities. For each transportation option, fill in the number of people in each group who most prefer that option under the group conditions. The test statistic is
+2. We managed to apply **Independence test with Pearson's $\chi^2$**. If we reject $H_0$, we can conclude there are interactions between situational variables. Try `argmax` for normalized probabilities. For each transportation option, fill in the number of people in each group who most prefer that option under the group conditions. The test statistic is
    $$
-   \sum_d^D \sum_w^W \sum_c^C \frac{(f_{dwc} - e_{dwc})^2}{e_{dwc}} \sim \chi^2(2\times1\times1)
+   \sum_i\sum_d^D \sum_w^W \sum_c^C \frac{(f_{dwci} - e_{dwci})^2}{e_{dwci}} \sim \chi^2(3\times11)
    \nonumber
    $$
 
-> [!WARNING]
->
-> Check the 3 assumptions before ANOVA.
->
-> Check the expected frequencies $e_{wcd}$s are above 5 or not.
 
 #### Question 2
 

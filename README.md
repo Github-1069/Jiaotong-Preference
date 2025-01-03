@@ -72,10 +72,7 @@ The summary of data is coded in **Basic Description** of `Analysis.ipynb`.
 1. **Independence test with Pearson's $\chi^2$** - in **Pearson's $\chi^2$** of `Analysis.ipynb`
    - $H_0$: under any given situation, the proportions of the transportation options are equal. If we reject $H_0$, we can conclude there are interactions between situational variables. 
    - For each transportation option, fill in the number of people in each group who most prefer(i.e. `argmax`) that option under the group situation. The test statistic is
-   $$
-   \sum_{o=0}^{n_o - 1} \sum_{s}^{S} \frac{(f_{os} - e_{os})^2}{e_{os}} \sim \chi^2\Big((n_o - 1)(n_S - 1)\Big)
-   \nonumber
-   $$
+   $$\sum_{o=0}^{n_o - 1} \sum_{s}^{S} \frac{(f_{os} - e_{os})^2}{e_{os}} \sim \chi^2\Big((n_o - 1)(n_S - 1)\Big)\nonumber$$
    where $o$ denotes transportation options, $S$ is the set of all situations, $n_o = 4$, $n_S = 12$.
 
 2. **Adjusted Marascuilo procedure with Bonferroni correction** - in **Marasuilo procedure** of `Analysis.ipynb`

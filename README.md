@@ -76,13 +76,22 @@ In `Clean.ipynb`, we
 
 3. Adjusted Marascuilo procedure with Bonferroni correction.
    - Why adjusted? In our textbook, 
-   - Why Bonferroni correction? 
+   - Why Bonferroni correction? We want to control the aggregate chance of committing type 1 error to 0.05.
+
+4. We apply t-test to figure out the relative importance rank of situational variables. We assume that if one variable(A) is more important than another(B) for an option, then with controlled A, change of B will not significantly influence the probability distribution of that option. For example, to test W is more important than C for certain option, we formulated
+$𝐻_0$: Given controlled D and C, different W leads to the same probability distribution of that option.($𝜇_{𝐷0𝐶}$=$𝜇_{𝐷1𝐶}$)
+$𝐻_𝑎$: Given controlled D and C, different W leads to the different probability distribution of that option.($𝜇_{𝐷0𝐶}$≠$𝜇_{𝐷1𝐶}$)
+If we reject $𝐻_0$, then we can deduce W is more important than C.
+
 
 #### Question 2
 
-Multivariate Logistic Regression. Pending.
+Multinomial Logistic Regression. Pending.
 
 ### Visulization
 
-1. Basic description. We draw pie charts for demographic variables.
+1. Basic description. We draw a pie chart for demographic variables.
 2. For question 1, 
+   - We draw a bar chart for number of the most favorable options of samples in different conditions.
+   - We draw a heat map for discrepancy of probability distribution under different situations.
+ 
